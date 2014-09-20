@@ -2,40 +2,33 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
-        inverse_m <- NULL
+        m <- NULL
 
-        set <- function(y) {                               #set the value of the matrix 
+#set the value of the matrix        
+        set <- function(y) {
                 x <<- y
-                inverse_m <<- NULL
+                m <<- NULL
         }
 
-        get <- function() x                                #get the value of the matrix     
-        setinverse <- function(solve) inverse_m <<- solve  # set the value of the inverse matrix
-        getinverse <- function() inverse_m                 #get the value of the inverse matrix
+#get the value of the matrix        
+        get <- function() x
+
+#set the matrix inversion
+        setinverse <- function(solve) m <<- solve
+
+#get the matrix inversion
+        getinverse <- function() m
         
-        list(set = set, get = get,                         #insert into the cache list
+#insert into the cache list
+        list(set = set, get = get,
              setinverse = setinverse,
-             getinverse = getinverse)
+             setinverse = setinverse)
 }
 
 
 
-## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. If the inverse has already been calculated (and the matrix has not changed), then the cachesolve should retrieve the inverse from the cache.
+## Write a short comment describing this function
 
 cacheSolve <- function(x, ...) {
-
-
-        inverse_m <- x$getinverse()
-
-        if(!is.null(inverse_m)) {                         #check if the inverse has already been calculated
-                message("getting cached data")
-                return(inverse_m)                         #if yes - return cached matrix
-        }
-        
-        data <- x$get()
-        inverse_m <- solve(data, ...)                     #calculates inverse of matrix
-        
-        x$setinverse(inverse_m)                           #save the cache
-        inverse_m                                         #Return a matrix that is the inverse of 'x'
+        ## Return a matrix that is the inverse of 'x'
 }
-
